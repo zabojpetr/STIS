@@ -73,7 +73,7 @@
 	<br>
 	<br>
 	<?php
-		$myfile = fopen("http://zaboj.ml/data/userscript/StisGraphLoader.user.js", "r");
+		$myfile = fopen("http://zaboj.ml/data/userscript/StisGraph.user.js", "r");
 		// Output one line until end-of-file
 		$version = null;
 		while(!feof($myfile)) {
@@ -86,7 +86,7 @@
 		fclose($myfile);
 	?>
 
-	<a class="btn" href="http://zaboj.ml/data/userscript/StisGraphLoader.user.js" title="Skript">Nainstalovat skript StisGraphLoader<?= $version!=null?" ".$version.trim():"";?></a>
+	<a class="btn" href="http://zaboj.ml/data/userscript/StisGraph.user.js" title="Skript">Nainstalovat skript StisGraph<?= $version!=null?" ".$version.trim():"";?></a>
 	<br>
 	<br>
 

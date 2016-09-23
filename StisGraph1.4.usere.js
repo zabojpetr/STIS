@@ -4,7 +4,7 @@
 // @description Úprava STISu a přidání grafů úspěšnosti
 // @include     http://stis.ping-pong.cz/*
 //@downloadURL  http://zaboj.ml/data/userscript/StisGraph.user.js
-// @version     1.4.1
+// @version     1.4
 // @grant       none
 // ==/UserScript==
 
@@ -377,11 +377,11 @@ else if(path.startsWith("/htm/druzstvo.php"))
         //console.log(newDiv);
     }
 
-    //var parent = brs[0].parentElement;
-    list.innerHTML = "";
-    list.style.width = "70%";
+    var parent = brs[0].parentElement;
+    parent.innerHTML = "";
+    parent.style.width = "70%";
 
-    list.insertBefore(table, brs[brs.length-1]);
+    parent.insertBefore(table, brs[brs.length-1]);
 /*
     for(i = brs.length-1; i>=0; i--)
     {
