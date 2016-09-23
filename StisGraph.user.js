@@ -4,7 +4,7 @@
 // @description Úprava STISu a přidání grafů úspěšnosti
 // @include     http://stis.ping-pong.cz/*
 //@downloadURL  http://zaboj.ml/data/userscript/StisGraph.user.js
-// @version     1.3.2
+// @version     1.4
 // @grant       none
 // ==/UserScript==
 
@@ -38,7 +38,7 @@ function pomer2Uspesnost(s)
 {
     if(s==undefined || s==null || s.length == 0) return 0;
 
-    var pomer = s.innerHTML.split(":");
+    var pomer = s.split(":");
     pomer[0] = parseInt(pomer[0]);
     pomer[1] = parseInt(pomer[1]);
     return (pomer[0]+pomer[1])!=0?Math.round(pomer[0]/(pomer[0]+pomer[1])*10000)/100:0;
@@ -50,6 +50,7 @@ function CreateHeader(nazev, mezera) {
     th.style.borderBottom = "2px solid grey";
     th.style.paddingLeft = mezera;
     th.style.paddingRight = mezera;
+    th.style.textAlign = "center";
     var strong = document.createElement("strong");
     strong.innerHTML = nazev;
     th.insertBefore(strong, null);
@@ -60,6 +61,7 @@ function CreateHeader(nazev, mezera) {
 function CreateHeader(nazev) {
     var th = document.createElement("th");
     th.style.borderBottom = "2px solid grey";
+    th.style.textAlign = "center";
     var strong = document.createElement("strong");
     strong.innerHTML = nazev;
     th.insertBefore(strong, null);
@@ -85,6 +87,82 @@ function ColorLuminance(hex, lum) {
     }
 
     return rgb;
+}
+
+function GenerateRowOfSoupiska(pozice, jmeno, pomerDvouhra, pomerCtyrhra)
+{
+    //vytvoření elementů
+    var tr = document.createElement("tr");
+    var position = document.createElement("td");
+    var name = document.createElement("td");
+    var dvouhry = document.createElement("td");
+    var ctyrhry = document.createElement("td");
+    var mezera = document.createElement("td");
+    var dvouhryp = document.createElement("td");
+    var ctyrhryp = document.createElement("td");
+
+    //nastavení pozice
+    position.innerHTML = pozice + ".";
+    position.style.textAlign="right";
+
+    //nastavení jména
+    name.style.fontWeight = "bold";
+    name.style.width = "250px";
+    name.appendChild(jmeno);
+
+    //poměr dvouher
+    dvouhry.insertBefore(pomerDvouhra,null);
+    dvouhry.style.textAlign="center";
+
+    //procenta a graf dvouher
+    dvouhryp.innerHTML = "<strong>" + pomer2Uspesnost(pomerDvouhra.innerHTML).toFixed(2) + "%</strong><br>";
+    dvouhryp.insertBefore(CreateGraph(pomer2Uspesnost(pomerDvouhra.innerHTML)),null);
+    dvouhryp.setAttribute("align","right");
+
+    //mezera
+    mezera.style.width = "30px";
+
+    //poměr čtyřher
+    ctyrhry.insertBefore(pomerCtyrhra,null);
+    ctyrhry.style.textAlign="center";
+
+    //procenta a graf čtyřher
+    ctyrhryp.innerHTML = "<strong>" + pomer2Uspesnost(pomerCtyrhra.innerHTML).toFixed(2) + "%</strong>";
+    ctyrhryp.insertBefore(CreateGraph(pomer2Uspesnost(pomerCtyrhra.innerHTML)),null);
+    ctyrhryp.setAttribute("align","right");
+
+/* pokud by byl graf pod poměrem a procentama
+    var spanc = document.createElement("span");
+    spanc.insertBefore(pomerCtyrhra,null);
+    spanc.style.float = "left";
+    spanc.style.textAlign = "center";
+    spanc.style.width = "50%";
+
+    var spancp = document.createElement("span");
+    spancp.innerHTML = "<strong>" + pomer2Uspesnost(pomerCtyrhra.innerHTML).toFixed(2) + "%</strong>";
+    spancp.style.float = "right";
+
+    var br = document.createElement("br");
+    br.style.float = "none";
+
+    var graph = CreateGraph(pomer2Uspesnost(pomerCtyrhra.innerHTML));
+
+    ctyrhryp.insertBefore(spanc,null);
+    ctyrhryp.insertBefore(spancp,null);
+    ctyrhryp.insertBefore(br,null);
+    ctyrhryp.insertBefore(graph,null);
+*/
+
+//vložení elementů do řádku
+    tr.insertBefore(position,null);
+    tr.insertBefore(name,null);
+    tr.insertBefore(dvouhry,null);
+    tr.insertBefore(dvouhryp,null);
+    tr.insertBefore(mezera,null);
+    tr.insertBefore(ctyrhry,null);
+    tr.insertBefore(ctyrhryp,null);
+
+    return tr;
 }
 
 var path = window.location.pathname;
@@ -162,7 +240,7 @@ else if(path.startsWith("/htm/soutez.php"))
 
         if(rows[i].getElementsByTagName("td").length<2) continue;
 
-        var uspesnost = pomer2Uspesnost(rows[i].getElementsByTagName("td")[rows[i].getElementsByTagName("td").length-2]);
+        var uspesnost = pomer2Uspesnost(rows[i].getElementsByTagName("td")[rows[i].getElementsByTagName("td").length-2].innerHTML);
 
         var newTd = document.createElement("td");
         newTd.style.width = "50px";
@@ -196,47 +274,115 @@ else if(path.startsWith("/htm/druzstvo.php"))
     var brs = list.getElementsByTagName("br");
     //console.log(brs);
 
+    var table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+    var thead = document.createElement("thead");
+    thead.insertBefore(CreateHeader(""),null);
+    thead.insertBefore(CreateHeader("Jméno"),null);
+    var th = CreateHeader("Dvouhry");
+    th.setAttribute("colspan","2");
+    thead.insertBefore(th,null);
+    thead.insertBefore(CreateHeader(""),null);
+    var th = CreateHeader("Čtyřhry");
+    th.setAttribute("colspan","2");
+    thead.insertBefore(th,null);
+    table.insertBefore(thead,null);
+
+
+
+    var position = 0;
+
+
     for (var i = 0; i < brs.length-1; i++) {
         //console.log("V cyklu");
-        if(brs[i].nextElementSibling.tagName.toLowerCase()!="a") continue; //nenásleduje odkaz = jméno hráče
+        if(brs[i].nextElementSibling.tagName.toLowerCase()!="a")
+        {
+            var tr = document.createElement("tr");
+            if(i%2 == 1)tr.style.backgroundColor = "#EEEEEE";
+            var td = document.createElement("td");
+            //var td = CreateHeader("");
+
+            td.setAttribute("colspan","7");
+            td.style.textAlign="center";
+
+            td.insertBefore(brs[i].nextElementSibling.cloneNode(true),null);
+            tr.insertBefore(td,null);
+            table.insertBefore(tr,null);
+
+            continue;
+        } //nenásleduje odkaz = jméno hráče
         //console.log("Za podmínkou");
 
+        position++;
         var uspesnostDvouhry = 0;
         var uspesnostCtyrhry = 0;
+
+        var pomerDvouhry = document.createElement("span");
+        pomerDvouhry.innerHTML = "0:0";
+        var pomerCtyrhry = document.createElement("span");
+        pomerCtyrhry.innerHTML = "0:0";
+        var jmeno = document.createElement("span");
+        jmeno.innerHTML = "Jmeno";
 
         var s = brs[i].nextElementSibling;
         while(s.tagName.toLowerCase()!="br")
         {
-            if(s.getAttribute("href").startsWith("dvouhry"))
+            if(s.tagName.toLowerCase() == "font")
             {
-                uspesnostDvouhry = pomer2Uspesnost(s);
+                var span = document.createElement("span");
+                span.insertBefore(jmeno.cloneNode(true),null);
+                jmeno = span;
+                jmeno.innerHTML += " - ";
+                jmeno.insertBefore(s.cloneNode(true),null);
+                s = s.nextElementSibling;
+                jmeno.insertBefore(s.cloneNode(true),null);
+            }
+            else if(s.getAttribute("href").startsWith("hrac"))
+            {
+                jmeno = s.cloneNode(true);
+            }
+            else if(s.getAttribute("href").startsWith("dvouhry"))
+            {
+                //uspesnostDvouhry = pomer2Uspesnost(s.innerHTML);
 
-                s.innerHTML += " - <strong>" + uspesnostDvouhry + "%</strong>";
+                //s.innerHTML += " - <strong>" + uspesnostDvouhry + "%</strong>";
+
+                pomerDvouhry = s.cloneNode(true);
             }
             else if(s.getAttribute("href").startsWith("ctyrhry"))
             {
-                uspesnostCtyrhry = pomer2Uspesnost(s);
+                //uspesnostCtyrhry = pomer2Uspesnost(s.innerHTML);
 
-                s.innerHTML += " - <strong>" + uspesnostCtyrhry + "%</strong>";
+                //s.innerHTML += " - <strong>" + uspesnostCtyrhry + "%</strong>";
+
+                pomerCtyrhry = s.cloneNode(true);
             }
 
-            //console.log(s);
-            //console.log(uspesnostDvouhry);
-            //console.log(uspesnostCtyrhry);
             s = s.nextElementSibling;
         }
 
 
-        var graph2 = CreateGraph(uspesnostDvouhry);
-        var graph4 = CreateGraph(uspesnostCtyrhry);
+        //var graph2 = CreateGraph(uspesnostDvouhry);
+        //var graph4 = CreateGraph(uspesnostCtyrhry);
 
-        brs[i].parentElement.insertBefore(graph2,brs[i+1]);
-        brs[i].parentElement.insertBefore(graph4,brs[i+1]);
+        //brs[i].parentElement.insertBefore(graph2,brs[i+1]);
+        //brs[i].parentElement.insertBefore(graph4,brs[i+1]);
+
+        var tr = GenerateRowOfSoupiska(position, jmeno, pomerDvouhry, pomerCtyrhry);
+        if(i%2 == 1)tr.style.backgroundColor = "#EEEEEE";
+        table.insertBefore(tr,null);
+
 
         //console.log(newDiv);
     }
 
+    var parent = brs[0].parentElement;
+    parent.innerHTML = "";
+    parent.style.width = "70%";
 
+    parent.insertBefore(table, brs[brs.length-1]);
+/*
     for(i = brs.length-1; i>=0; i--)
     {
         //console.log(brs[i].previousElementSibling.tagName.toLowerCase())
@@ -247,7 +393,8 @@ else if(path.startsWith("/htm/druzstvo.php"))
             var parent = brs[i].parentNode;
             parent.removeChild(brs[i]);
         }
-    }
+    }*/
+
 }
 //los a výsledky
 else if(path.startsWith("/htm/vysledky.php") || path.startsWith("/htm/dvouhry.php") || path.startsWith("/htm/ctyrhry.php"))
