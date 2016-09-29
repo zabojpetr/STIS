@@ -1,12 +1,9 @@
-<?php
-header('Access-Control-Allow-Origin: *');  
-?>
-<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-    <title>Záboj.ml - Vylepšení STISu</title>
-    <style>
+<title>
+Aktualizace skriptu
+</title>
+<style>
 		body {
     		text-align: center;
 		}
@@ -50,31 +47,12 @@ header('Access-Control-Allow-Origin: *');
 	</style>
 </head>
 <body>
-	<h1>Uživatelský skript pro STIS</h1>
-	<h2>Přidání grafů úspěšnosti do STISu</h2>
-	<br>
-	<h3>Náhledy</h3>
-	<img src="data/other/stisTabulka.png" alt="Tabulka">
-	<br>
-	<img src="data/other/stisUspesnost.png" alt="Úspěšnost">
-	<br>
-	<img src="data/other/stisDruzstvo.png" alt="Družstvo">
-	<br>
-	<h3>Návod k instalaci</h3>
-	<p>
-		Před nainstalováním toho skriptu si nainstaluje doplněk GreaseMonkey nebo TamperMonkey nebo nějaký jiný, který umožní spouštět uživatelské skripty
-		<ul>
-			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/greasemonkey/" title="Firefox - Greasemonkey">Firefox - Greasemonkey</li>
-			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/tampermonkey/?src=ss" title="Firefox - Tampermonkey">Firefox - Tampermonkey</li>
-			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/userunified-script-injector/" title="Firefox - USI">Firefox Mobile - User|Unified Script Injector (při update je občas nutné smazat starou verzi)</li>
-			<li><a target="_blank" href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=cs" title="Chrome - Tampermonkey">Chrome - Tampermonkey</li>
-			<li><a target="_blank" href="https://addons.opera.com/cs/extensions/details/tampermonkey-beta/?display=en" title="Opera - Tampermonkey">Opera - Tampermonkey</li>
-			<li><a target="_blank" href="http://tampermonkey.net/?ext=dhdg&browser=edge" title="Edge - Tampermonkey">Edge - Tampermonkey</li>
-		</ul>
-	</p>
-	<br>
-	<br>
-	<?php
+<h1>Aktualizace skriptu</h1>
+
+Více podrobností o aktualizaci <a target="_blank" href="https://github.com/zabojpetr/STIS/commits/master">ZDE</a>
+<br>
+<br>
+<?php
 		$myfile = fopen("http://zaboj.ml/data/userscript/StisGraph.user.js", "r");
 		// Output one line until end-of-file
 		$version = null;

@@ -18,4 +18,11 @@
 ### Návod k instalaci
 Před nainstalováním toho skriptu si nainstaluje doplněk GreaseMonkey nebo TamperMonkey nebo nějaký jiný, který umožní spouštět uživatelské skripty.
 
+- [Firefox - Greasemonkey](https://addons.mozilla.org/cs/firefox/addon/greasemonkey/) 
+- [Firefox - Tampermonkey](https://addons.mozilla.org/cs/firefox/addon/tampermonkey/?src=ss)
+- [Firefox Mobile - User|Unified Script Injector](https://addons.mozilla.org/cs/firefox/addon/userunified-script-injector/) (při update je občas nutné smazat starou verzi)
+- [Chrome - Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=cs)
+- [Opera - Tampermonkey](https://addons.opera.com/cs/extensions/details/tampermonkey-beta/?display=en)
+- [Edge - Tampermonkey](http://tampermonkey.net/?ext=dhdg&browser=edge)
+
 Poté již stačí kliknou [ZDE](https://github.com/zabojpetr/STIS/raw/master/StisGraph.user.js)
