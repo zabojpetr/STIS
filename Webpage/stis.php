@@ -64,12 +64,12 @@ header('Access-Control-Allow-Origin: *');
 	<p>
 		Před nainstalováním toho skriptu si nainstaluje doplněk GreaseMonkey nebo TamperMonkey nebo nějaký jiný, který umožní spouštět uživatelské skripty
 		<ul>
-			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/greasemonkey/" title="Firefox - Greasemonkey">Firefox - Greasemonkey</li>
-			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/tampermonkey/?src=ss" title="Firefox - Tampermonkey">Firefox - Tampermonkey</li>
-			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/userunified-script-injector/" title="Firefox - USI">Firefox Mobile - User|Unified Script Injector (při update je občas nutné smazat starou verzi)</li>
-			<li><a target="_blank" href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=cs" title="Chrome - Tampermonkey">Chrome - Tampermonkey</li>
-			<li><a target="_blank" href="https://addons.opera.com/cs/extensions/details/tampermonkey-beta/?display=en" title="Opera - Tampermonkey">Opera - Tampermonkey</li>
-			<li><a target="_blank" href="http://tampermonkey.net/?ext=dhdg&browser=edge" title="Edge - Tampermonkey">Edge - Tampermonkey</li>
+			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/greasemonkey/" title="Firefox - Greasemonkey">Firefox - Greasemonkey</a></li>
+			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/tampermonkey/?src=ss" title="Firefox - Tampermonkey">Firefox - Tampermonkey</a></li>
+			<li><a target="_blank" href="https://addons.mozilla.org/cs/firefox/addon/userunified-script-injector/" title="Firefox - USI">Firefox Mobile - User|Unified Script Injector</a> (při update je občas nutné smazat starou verzi)</li>
+			<li><a target="_blank" href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=cs" title="Chrome - Tampermonkey">Chrome - Tampermonkey</a></li>
+			<li><a target="_blank" href="https://addons.opera.com/cs/extensions/details/tampermonkey-beta/?display=en" title="Opera - Tampermonkey">Opera - Tampermonkey</a></li>
+			<li><a target="_blank" href="http://tampermonkey.net/?ext=dhdg&browser=edge" title="Edge - Tampermonkey">Edge - Tampermonkey</a></li>
 		</ul>
 	</p>
 	<br>
