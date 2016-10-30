@@ -66,7 +66,7 @@ Více podrobností o aktualizaci <a target="_blank" href="https://github.com/zab
 		fclose($myfile);
 	?>
 
-	<a class="btn" href="https://github.com/zabojpetr/STIS/raw/master/StisGraph.user.js" title="Skript">Nainstalovat skript StisGraph<?= $version!=null?" ".$version.trim():"";?></a>
+	<a class="btn" target="_blank" href="https://github.com/zabojpetr/STIS/raw/master/StisGraph.user.js" title="Skript">Nainstalovat skript StisGraph<?= $version!=null?" ".$version.trim():"";?></a>
 	<br>
 	<br>
 
