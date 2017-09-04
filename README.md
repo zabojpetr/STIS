@@ -10,6 +10,10 @@
 ![družstvo](https://github.com/zabojpetr/STIS/blob/master/Images/stisDruzstvoPuvodni.png)
 #### Družstvo se skriptem
 ![družstvo](https://github.com/zabojpetr/STIS/blob/master/Images/stisDruzstvo.png)
+#### Hráč bez skriptem
+![hráč](https://github.com/zabojpetr/STIS/blob/master/Images/stisHracPuvodni.png)
+#### Hráč se skriptem
+![hráč](https://github.com/zabojpetr/STIS/blob/master/Images/stisHrac.png)
 #### Úspěšnost bez skriptu
 ![úspěšnost](https://github.com/zabojpetr/STIS/blob/master/Images/stisUspesnostPuvodni.png)
 #### Úspěšnost se skriptem
